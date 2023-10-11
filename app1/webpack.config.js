@@ -88,7 +88,7 @@ module.exports = {
       // there is no version check for the required version
       // so it will always use the higher version found
       remotes: {
-        app2: "app2@http://localhost:3002/remoteEntry.js",
+        app2: "app2@http://localhost:3002/remoteEntry.js"
       },
       shared: {
         vue: {

@@ -34,7 +34,7 @@ export const useDynamicScript = (args) => {
   function setFailed(val) {
     state.failed = val;
   }
-  watch(args, (cur) => {
+  function appendScript(cur) {
     if (!cur.url || urls.value.has(cur.url)) {
       initAsyncComponent();
       return;
@@ -63,14 +63,17 @@ export const useDynamicScript = (args) => {
     };
 
     document.head.appendChild(element);
-
+    return document;
+  }
+  watch(args, (cur) => {
+    const document = appendScript(cur);
     return () => {
       console.log(`Dynamic Script Removed: ${cur.url}`);
       document.head.removeChild(element);
     };
   });
   function initAsyncComponent() {
-    const system = args.value;
+    const system = args.value || args;
     const key = system.scope + system.module;
     if (componentsLoadMap.value.has(key)) {
       components.value.set(state.name, componentsLoadMap.value.get(key));
@@ -81,6 +84,10 @@ export const useDynamicScript = (args) => {
     );
     components.value.set(state.name, markRaw(com));
     componentsLoadMap.value.set(key, markRaw(com));
+  }
+  // 初始化执行
+  if (args.value && args.value.url) {
+    appendScript(args.value);
   }
   return {
     ...toRefs(state),

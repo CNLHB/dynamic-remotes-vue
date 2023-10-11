@@ -88,6 +88,9 @@ module.exports = {
         "./Widget": "./src/Widget.vue",
         "./Slider": "./src/Slider.vue",
       },
+      remotes: {
+        app3: "app3@http://localhost:3003/remoteEntry.js",
+      },
       shared: {
         // vue: { singleton: true },
         vue: {
