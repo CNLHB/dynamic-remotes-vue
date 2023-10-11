@@ -13,7 +13,7 @@ module.exports = {
   target: "web",
   devServer: {
     contentBase: path.join(__dirname, "dist"),
-    port: 3003,
+    port: 3006,
   },
   output: {
     publicPath: "auto",
@@ -89,6 +89,7 @@ module.exports = {
         "./Widget": "./src/Widget.vue",
       },
       shared: {
+        moment: deps.moment,
         vue: {
           requiredVersion: deps.vue,
           import: "vue", // the "react" package will be used a provided and fallback module
